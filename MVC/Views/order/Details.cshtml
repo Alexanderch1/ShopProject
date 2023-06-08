@@ -1,0 +1,48 @@
+﻿@model MVC.ViewModels.orderVM
+
+<h2>Order Details</h2>
+
+<p>@ViewBag.ErrorMessage</p>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Order Date</th>
+        <td>@Model.OrderDate</td>
+    </tr>
+    <tr>
+        <th>Customer</th>
+        <td>@Model.Customer.FirstName @Model.Customer.LastName</td>
+    </tr>
+    <tr>
+        <th>Product</th>
+        <td>@Model.Product.Name</td>
+    </tr>
+    <tr>
+        <th>Quantity</th>
+        <td>@Model.Quantity</td>
+    </tr>
+    <tr>
+        <th>Total Price</th>
+        <td>@Model.TotalPrice</td>
+    </tr>
+    <tr>
+        <th>Shipping Address</th>
+        <td>@Model.ShippingAddress</td>
+    </tr>
+    <tr>
+        <th>Is Shipped</th>
+        <td>@(Model.IsShipped ? "Shipped" : "Not Shipped")</td>
+    </tr>
+    <tr>
+        <th>Payment Method</th>
+        <td>@Model.PaymentMethod</td>
+    </tr>
+</table>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

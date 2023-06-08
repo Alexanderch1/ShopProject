@@ -1,0 +1,71 @@
+﻿@model MVC.ViewModels.ProductVM
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Product</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price)
+        @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Price)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Category)
+        @Html.TextBoxFor(model => model.Category, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Category)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReleaseDate)
+        @Html.TextBoxFor(model => model.ReleaseDate, new { @class = "form-control datepicker" })
+        @Html.ValidationMessageFor(model => model.ReleaseDate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UnitsInStock)
+        @Html.TextBoxFor(model => model.UnitsInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.UnitsInStock)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsAvailable)
+        @Html.CheckBoxFor(model => model.IsAvailable, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.IsAvailable)
+    </div>
+
+    <p>
+        <input type="submit" value="Create" class="btn btn-primary" />
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+    </p>
+}
+
+@*@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+        });
+    </script>
+}*@

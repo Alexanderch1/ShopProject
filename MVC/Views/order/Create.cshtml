@@ -1,0 +1,66 @@
+﻿@model MVC.ViewModels.orderVM
+
+<h2>Create New Order</h2>
+
+<p>@ViewBag.ErrorMessage</p>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OrderDate)
+        @Html.EditorFor(model => model.OrderDate)
+        @Html.ValidationMessageFor(model => model.OrderDate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CustomerId)
+        @Html.DropDownListFor(model => model.CustomerId, new SelectList(Model.Customers, "Id", "FirstName"), "Select a customer", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CustomerId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductId)
+        @Html.DropDownListFor(model => model.ProductId, new SelectList(Model.Products, "Id", "Name"), "Select a product")
+        @Html.ValidationMessageFor(model => model.ProductId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Quantity)
+        @Html.EditorFor(model => model.Quantity)
+        @Html.ValidationMessageFor(model => model.Quantity)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TotalPrice)
+        @Html.EditorFor(model => model.TotalPrice)
+        @Html.ValidationMessageFor(model => model.TotalPrice)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ShippingAddress)
+        @Html.EditorFor(model => model.ShippingAddress)
+        @Html.ValidationMessageFor(model => model.ShippingAddress)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsShipped)
+        @Html.CheckBoxFor(model => model.IsShipped)
+        @Html.ValidationMessageFor(model => model.IsShipped)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PaymentMethod)
+        @Html.EditorFor(model => model.PaymentMethod)
+        @Html.ValidationMessageFor(model => model.PaymentMethod)
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

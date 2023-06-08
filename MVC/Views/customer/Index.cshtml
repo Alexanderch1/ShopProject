@@ -1,0 +1,86 @@
+﻿@model MVC.ViewModels.Customer.IndexVM
+
+<h2>Customer List</h2>
+
+@using (Html.BeginForm("Index", "Customer", FormMethod.Get))
+{
+    <div>
+        <label>First Name:</label>
+        @Html.TextBoxFor(m => m.Filter.FirstName)
+        <input type="submit" value="Filter" />
+    </div>
+}
+
+<p>@ViewBag.ErrorMessage</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Registration Date</th>
+            <th>Age</th>
+            <th>Is Premium</th>
+            <th>Phone</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Items)
+        {
+            <tr>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@customer.Email</td>
+                <td>@customer.Address</td>
+                <td>@customer.City</td>
+                <td>@customer.Country</td>
+                <td>@customer.RegistrationDate</td>
+                <td>@customer.Age</td>
+                <td>@(customer.IsPremium ? "Premium" : "Not Premium")</td>
+                <td>@customer.Phone</td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = customer.Id }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = customer.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = customer.Id }, new { onclick = "return confirm('Are you sure you want to delete this customer?');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <label>Items per Page:</label>
+    <select id="itemsPerPage" onchange="changeItemsPerPage()">
+        <option value="3" @(ViewBag.ItemsPerPage == 3 ? "selected" : "")>3</option>
+        <option value="5" @(ViewBag.ItemsPerPage == 5 ? "selected" : "")>5</option>
+        <option value="10" @(ViewBag.ItemsPerPage == 10 ? "selected" : "")>10</option>
+        <option value="20" @(ViewBag.ItemsPerPage == 20 ? "selected" : "")>20</option>
+    </select>
+</div>
+
+<div>
+    @if (Model.Pager.PagesCount > 1)
+    {
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.Pager.PagesCount; i++)
+            {
+                <li class="@(i == Model.Pager.Page ? "active" : "")">@Html.ActionLink(i.ToString(), "Index", new { page = i, itemsPerPage = ViewBag.ItemsPerPage })</li>
+            }
+        </ul>
+    }
+</div>
+
+<p>@Html.ActionLink("Create New Customer", "Create")</p>
+<script>
+    function changeItemsPerPage() {
+        var itemsPerPage = document.getElementById("itemsPerPage").value;
+        var urlParams = new URLSearchParams(window.location.search);
+        urlParams.set("itemsPerPage", itemsPerPage);
+        window.location.href = window.location.pathname + "?" + urlParams.toString();
+    }
+</script>
